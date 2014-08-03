@@ -25,7 +25,7 @@ Dir["./filters/**/*.rb"].each { |rb| require rb }
 
 Cuba.use Rack::MethodOverride
 Cuba.use Rack::Session::Cookie,
-  key: "my_new_app",
+  key: "beemarks",
   secret: ENV.fetch("SESSION_SECRET")
 
 Cuba.use Rack::Protection
