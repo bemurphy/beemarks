@@ -50,7 +50,7 @@ Api.define do
       title: req.params["title"],
       url: req.params["url"],
       user_id: Link::DEFAULT_USER_ID,
-      tags: req.params["tags"] || []
+      tags: req.params["tags"]
     })
 
     if filter.valid?
@@ -68,7 +68,7 @@ Api.define do
     filter = LinkUpdateFilter.new({
       title: req.params["title"],
       url: req.params["url"],
-      tags: req.params["tags"].uniq
+      tags: req.params["tags"]
     })
 
     if filter.valid?

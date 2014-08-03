@@ -31,7 +31,7 @@ class Link
     if tags.to_s.empty?
       @tags = []
     else
-      @tags = tags
+      @tags = tags.uniq
     end
   end
 
