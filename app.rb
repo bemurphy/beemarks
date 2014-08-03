@@ -48,7 +48,7 @@ Cuba.define do
     directives = [
       "default-src 'none';",
       # TODO get the unsafe-eval out of here
-      "script-src 'self' ajax.googleapis.com getbootstrap.com 'unsafe-eval';",
+      "script-src 'self' ajax.googleapis.com 'unsafe-eval';",
       "connect-src 'self';",
       "font-src 'self' themes.googleusercontent.com;",
       "img-src 'self';",
