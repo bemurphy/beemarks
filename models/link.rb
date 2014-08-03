@@ -2,14 +2,6 @@ require "faker"
 require "json"
 require "restclient"
 
-class User
-  attr_accessor :id
-
-  def initialize(id)
-    self.id = id
-  end
-end
-
 class Link
   DEFAULT_USER_ID = 1
 
@@ -184,10 +176,6 @@ class Link
         atts[att] = send(att)
       end
     end
-  end
-
-  def user
-    @user ||= User.new(user_id)
   end
 
   def self.make_fakes(n = 10)
