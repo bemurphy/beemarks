@@ -77,8 +77,9 @@ class Link
 
     query[:endkey] = [user_id, "0"].to_json
 
-    qs = Rack::Utils.build_query(query)
-    doc = JSON[RestClient.get(File.join(database, "_design", "links", "_view", "allForUser", "?#{qs}"), content_type: :json)]
+    qs  = Rack::Utils.build_query(query)
+    url = File.join(database, "_design/links", "_view/allForUser", "?#{qs}")
+    doc = JSON[RestClient.get(url, content_type: :json)]
 
     collection = Collection.new
 
