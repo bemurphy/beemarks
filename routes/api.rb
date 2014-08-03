@@ -12,17 +12,7 @@ Api.define do
 
   on get, "links/:id" do |id|
     link = Link[id]
-
-    data = {
-      id: link.id,
-      title: link.title,
-      url: link.url,
-      host: URI.parse(link.url.to_s).host,
-      created_at: link.created_at.strftime('%-m/%-d/%y'),
-      tags: link.tags
-    }
-
-    res.write(data.to_json)
+    res.write(LinkSerializer.new(link).to_json)
   end
 
   on get, "links", param('q') do |query|
@@ -34,16 +24,7 @@ Api.define do
       l.title.downcase.include?(query)
     end
 
-    data = links.map do |link|
-      {
-        id: link.id,
-        title: link.title,
-        url: link.url,
-        host: URI.parse(link.url.to_s).host,
-        created_at: link.created_at.strftime('%-m/%-d/%y'),
-        tags: link.tags
-      }
-    end
+    data = links.map { |l| LinkSerializer.new(l).to_hash }
 
     res.write({data: data}.to_json)
   end
@@ -73,18 +54,8 @@ Api.define do
     })
 
     if filter.valid?
-      link = Link.create(filter.attributes);
-
-      data = {
-        id: link.id,
-        title: link.title,
-        url: link.url,
-        host: URI.parse(link.url.to_s).host,
-        created_at: link.created_at.strftime('%-m/%-d/%y'),
-        tags: link.tags
-      }
-
-      res.write(data.to_json)
+      link = Link.create(filter.attributes)
+      res.write(LinkSerializer.new(link).to_json)
     else
       res.status = 400
       res.write({status: 'error'}.to_json)

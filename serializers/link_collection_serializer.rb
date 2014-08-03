@@ -14,18 +14,7 @@ class LinkCollectionSerializer
   end
 
   def serialize(item)
-    {
-      id: item.id,
-      title: item.title,
-      url: item.url,
-      host: get_host(item.url),
-      created_at: item.created_at.strftime('%-m/%-d/%y'),
-      tags: item.tags
-    }
-  end
-
-  def get_host(url)
-    URI.parse(url.to_s).host
+    LinkSerializer.new(item).to_hash
   end
 
   def to_json
