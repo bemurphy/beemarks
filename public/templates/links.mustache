@@ -1,0 +1,53 @@
+<links links="links" addview="addview" editview="editview">
+<div class="row">
+  <div class="sidebar col-md-2">
+    <div class="user">
+      Brendon Murphy
+      <a href="#" class="pull-right">Sign out</a>
+    </div>
+    <ul class="nav nav-sidebar">
+      <li>
+        {{^searching}}
+        <a href="#" data-search><span class="glyphicon glyphicon-search"></span> Search</a>
+        {{/searching}}
+        {{#searching}}
+        <a href="#" class="searching"><span class="glyphicon glyphicon-search"></span>
+          <input type="text" class="form-control input-sm" can-keyup="searchInput" />
+        </a>
+        {{/searching}}
+      </li>
+      <li><a href="/" data-my-links><span class="glyphicon glyphicon-bookmark"></span> My Links</a></li>
+      <li><a id="add-link" data-add href="#"><span class="glyphicon glyphicon-plus"></span> Add Link</a></li>
+      <li><a href="#"><span class="glyphicon glyphicon-cog"></span> Settings</a></li>
+    </ul>
+  </div>
+
+  <div class="col-md-10 main col-md-offset-2">
+    <div class="row">
+      {{#each links}}
+      <div id="link-{{id}}" class="link col-md-12" data-id="{{id}}">
+        <span class="created-at pull-right text-muted">{{created_at}}</span>
+        <a href="{{url}}" target="_blank" class="target">{{title}}</a> <span class="host text-muted">{{host}}</span>
+        <div class="tags">
+          {{#each tags}}
+          <a href="#!tags/{{.}}" class="label label-default tag pull-left">{{.}}</a>
+          {{/each}}
+        </div>
+        <div class="actions pull-right">
+          <a href="#" data-edit {{data 'link'}}>Edit</a>
+          <a href="#" can-click="destroy">Delete</a>
+        </div>
+      </div>
+      {{/each}}
+    </div>
+
+    <pager list="links" startkey="startkey" startdocid="startdocid">
+    {{#isVisible}}
+    <div id="pager" class="col-md-4 col-md-offset-4">
+      <a href="" class="btn btn-default btn-block">Load more</a>
+    </div>
+    {{/isVisible}}
+    </pager>
+  </div>
+</div>
+</links>

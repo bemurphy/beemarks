@@ -1,0 +1,115 @@
+html {
+  height: 100%;
+}
+
+body {
+  padding-bottom: 40px;
+}
+
+.modal.fade .modal-dialog,
+.modal.in .modal-dialog {
+   -webkit-transform: none;
+    transform: none;
+}
+
+.sidebar {
+  background: #f5f5f5;
+  border-right: 1px solid #eee;
+  display: block;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  padding: 0 20px 20px;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+.sidebar .user {
+  background: #BBB;
+  color: white;
+  font-size: 1.2em;
+  font-weight: 200;
+  margin-right: -21px; /* 20px padding + 1px border */
+  margin-left: -20px;
+  padding: 10px 20px;
+}
+
+.sidebar .user a {
+  color: white;
+  font-size: 0.7em;
+  padding-top: 4px;
+}
+
+.nav-sidebar {
+  margin-top: 20px;
+  margin-right: -21px; /* 20px padding + 1px border */
+  margin-bottom: 20px;
+  margin-left: -20px;
+}
+
+.nav-sidebar > li > a {
+  padding-right: 20px;
+  padding-left: 20px;
+  font-size: 1.325em;
+}
+
+.nav-sidebar > li > a .glyphicon {
+  margin-right: 5px;
+  position: relative;
+  top: 2px;
+}
+
+#pager {
+  margin-top: 30px;
+}
+
+.link {
+  padding: 10px 20px 18px;
+  border-bottom: 1px solid #eee;
+}
+
+.link:first-child {
+  border-top: 1px solid #eee;
+}
+
+.link a {
+  margin-right: 7px;
+}
+
+.link a.target {
+  font-size: 1.2em;
+}
+
+.link a:active, .link a:hover {
+  text-decoration: none;
+}
+
+.link .tags {
+  margin-top: 5px;
+}
+
+.link .tag {
+  margin-right: 5px;
+}
+
+.link .tag {
+  background-color: #BBB;
+}
+
+.link .actions {
+  visibility: hidden;
+}
+
+.link:hover .actions {
+  visibility: visible;
+}
+
+.link .actions a:last-child {
+  margin-right: 0;
+}
+
+.nav-sidebar .searching input {
+  width: 85%;
+  display: inline;
+}

@@ -1,0 +1,5 @@
+<div id="links-wrapper"></div>
+
+<script type="application/json" id="links-data">
+  {{ serialized_links.to_json }}
+</script>
