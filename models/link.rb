@@ -1,4 +1,3 @@
-require "faker"
 require "json"
 require "restclient"
 
@@ -145,17 +144,6 @@ class Link
         att = ivar[1..-1].to_sym
         atts[att] = send(att)
       end
-    end
-  end
-
-  def self.make_fakes(n = 10)
-    n.times do
-      create(
-        title: Faker::Lorem.words(3).join(" ").capitalize,
-        url: Faker::Internet.url,
-        user_id: DEFAULT_USER_ID,
-        tags: Faker::Lorem.words(4).to_a
-      )
     end
   end
 

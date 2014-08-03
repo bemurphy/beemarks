@@ -12,8 +12,6 @@ gem "scrivener_errors"
 gem "shield"
 gem "thin"
 
-gem "faker"
-
 group :development do
   gem "shotgun"
 end
