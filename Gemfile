@@ -2,7 +2,6 @@ source "https://rubygems.org"
 
 gem "cuba"
 gem "cuba-contrib"
-gem "json-serializer"
 gem "mote"
 gem "rack-protection"
 gem "rest_client"

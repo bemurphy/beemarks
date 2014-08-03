@@ -1,6 +1,5 @@
 require "cuba"
 require "cuba/contrib"
-require "json_serializer"
 require "mote"
 # require "ohm"
 # require "ohm/contrib"
