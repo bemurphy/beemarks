@@ -13,12 +13,6 @@ class Link
   attr_writer :type
   attr_writer :created_at, :updated_at, :detached_at
 
-  class UnixTime < Time
-    def to_s
-      to_i.to_s
-    end
-  end
-
   def tags=(tags)
     if tags.to_s.empty?
       @tags = []
@@ -172,6 +166,12 @@ class Link
 
   def enforce_persisted
     persisted? or raise 'Not persisted'
+  end
+
+  class UnixTime < Time
+    def to_s
+      to_i.to_s
+    end
   end
 
   def timecast(t)
