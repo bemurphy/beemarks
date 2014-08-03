@@ -33,7 +33,7 @@ Cuba.use Rack::ETag
 
 Cuba.use Rack::Static,
   root: "./public",
-  urls: %w[/js /css /img /templates],
+  urls: %w[/js /css /img /fonts /templates],
   header_rules: [
     # cache 1 week
     [:all, {'Cache-Control' => 'public, max-age=604800'}],
