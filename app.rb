@@ -1,8 +1,6 @@
 require "cuba"
 require "cuba/contrib"
 require "mote"
-# require "ohm"
-# require "ohm/contrib"
 require "rack/protection"
 require "scrivener"
 require "scrivener_errors"
@@ -14,8 +12,7 @@ Cuba.plugin ScrivenerErrors::Helpers
 Cuba.plugin Shield::Helpers
 
 # Require all application files.
-# Dir["./models/**/*.rb"].each  { |rb| require rb }
-require "./models/link"
+Dir["./models/**/*.rb"].each  { |rb| require rb }
 Dir["./serializers/**/*.rb"].each  { |rb| require rb }
 Dir["./routes/**/*.rb"].each  { |rb| require rb }
 
