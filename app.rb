@@ -48,11 +48,11 @@ Cuba.define do
     directives = [
       "default-src 'none';",
       # TODO get the unsafe-eval out of here
-      "script-src 'self' ajax.googleapis.com getbootstrap.com bootswatch.com 'unsafe-eval';",
+      "script-src 'self' ajax.googleapis.com getbootstrap.com 'unsafe-eval';",
       "connect-src 'self';",
-      "font-src 'self' themes.googleusercontent.com bootswatch.com;",
-      "img-src 'self' bootswatch.com;",
-      "style-src 'self' bootswatch.com fonts.googleapis.com;"
+      "font-src 'self' themes.googleusercontent.com;",
+      "img-src 'self';",
+      "style-src 'self' fonts.googleapis.com;"
     ].join(" ")
 
     res.headers[header] = directives
