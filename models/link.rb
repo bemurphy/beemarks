@@ -111,10 +111,12 @@ class Link
     query[:descending] = true
     query[:limit] = per_page + 1
 
+    # '0' and 'g' are 1 beyond the boundaries of hex values, so
+    # they can be used for view keys
     if query[:startkey]
       query[:startkey] = [user_id, query[:startkey]].to_json
     else
-      query[:startkey] = [user_id, "G"].to_json
+      query[:startkey] = [user_id, "g"].to_json
     end
 
     query[:endkey] = [user_id, "0"].to_json
