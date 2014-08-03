@@ -142,20 +142,16 @@ class Link
   end
 
   def delete
-    if new_record?
-      raise 'Not persisted'
-    else
-      RestClient.delete(File.join(database, id, "?rev=#{_rev}"), content_type: :json)
-    end
+    enforce_persisted
+
+    RestClient.delete(File.join(database, id, "?rev=#{_rev}"), content_type: :json)
   end
 
   def detach
-    if new_record?
-      raise 'Not persisted'
-    else
-      self.detached_at = Time.now
-      save
-    end
+    enforce_persisted
+
+    self.detached_at = Time.now
+    save
   end
 
   def save
@@ -203,6 +199,10 @@ class Link
 
   def database
     self.class.database
+  end
+
+  def enforce_persisted
+    persisted? or raise 'Not persisted'
   end
 
   def create
