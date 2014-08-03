@@ -65,10 +65,6 @@ class Link
     timecast(@detached_at)
   end
 
-  def timecast(t)
-    t && UnixTime.at(t.to_i)
-  end
-
   def self.database
     "http://localhost:5984/links"
   end
@@ -213,6 +209,10 @@ class Link
 
   def enforce_persisted
     persisted? or raise 'Not persisted'
+  end
+
+  def timecast(t)
+    t && UnixTime.at(t.to_i)
   end
 
   def save_as_new
