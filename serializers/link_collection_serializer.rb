@@ -1,6 +1,6 @@
 require "json"
 
-class LinkSerializer < JsonSerializer
+class LinkCollectionSerializer < JsonSerializer
   def initialize(collection)
     @collection = collection
   end

@@ -59,7 +59,7 @@ Api.define do
     end
 
     links = Link.all_for_user(Link::DEFAULT_USER_ID, query)
-    serialized_links = LinkSerializer.new(links)
+    serialized_links = LinkCollectionSerializer.new(links)
 
     res.write serialized_links.to_json
   end
