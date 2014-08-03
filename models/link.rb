@@ -1,7 +1,6 @@
 require "faker"
 require "json"
 require "restclient"
-require "securerandom"
 
 class User
   attr_accessor :id
