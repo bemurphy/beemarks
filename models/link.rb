@@ -3,8 +3,6 @@ require "json"
 require "restclient"
 require "securerandom"
 
-DEFAULT_USER_ID = 1
-
 class User
   attr_accessor :id
 
@@ -14,6 +12,8 @@ class User
 end
 
 class Link
+  DEFAULT_USER_ID = 1
+
   attr_accessor :id
   attr_accessor :title
   attr_accessor :url
