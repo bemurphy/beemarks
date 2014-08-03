@@ -63,13 +63,13 @@ Api.define do
   end
 
   on put, "links/:id" do |id|
-    link       = Link[id]
+    link = Link[id]
 
-    link.title = req.params["title"]
-    link.url   = req.params["url"]
-    link.tags  = req.params["tags"].uniq
-
-    link.save
+    link.update({
+      title: req.params["title"],
+      url: req.params["url"],
+      tags: req.params["tags"].uniq
+    })
 
     res.write({status: 'ok'}.to_json)
   end

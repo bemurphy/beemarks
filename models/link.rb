@@ -158,10 +158,19 @@ class Link
 
   def save
     if new_record?
-      create
+      save_as_new
     else
-      update
+      save_as_update
     end
+  end
+
+  def update(attributes)
+    update_attributes(attributes)
+    save
+  end
+
+  def update_attributes(atts)
+    atts.each { |att, val| send(:"#{att}=", val) }
   end
 
   def new_record?
@@ -207,7 +216,7 @@ class Link
     persisted? or raise 'Not persisted'
   end
 
-  def create
+  def save_as_new
     self.created_at = self.updated_at = Time.now.utc
     doc = JSON[RestClient.post(database, attributes.to_json, content_type: :json)]
     self.id = self._id = doc["id"]
@@ -215,7 +224,7 @@ class Link
     self
   end
 
-  def update
+  def save_as_update
     self.updated_at = Time.now.utc
     doc = JSON[RestClient.put(File.join(database, id), attributes.to_json, content_type: :json)]
     self._rev = doc["rev"]
