@@ -13,44 +13,6 @@ class Link
   attr_writer :type
   attr_writer :created_at, :updated_at, :detached_at
 
-  def tags=(tags)
-    if tags.to_s.empty?
-      @tags = []
-    else
-      @tags = tags.uniq
-    end
-  end
-
-  def tags
-    @tags || []
-  end
-
-  def type
-    self.class.name
-  end
-
-  def _id=(id)
-    self.id = id
-  end
-
-  def initialize(atts = {})
-    atts.each do |k, v|
-      self.send(:"#{k}=", v)
-    end
-  end
-
-  def created_at
-    timecast(@created_at)
-  end
-
-  def updated_at
-    timecast(@updated_at)
-  end
-
-  def detached_at
-    timecast(@detached_at)
-  end
-
   def self.database
     "http://localhost:5984/links"
   end
@@ -98,6 +60,44 @@ class Link
 
   def self.create(atts = {})
     new(atts).save
+  end
+
+  def initialize(atts = {})
+    atts.each do |k, v|
+      self.send(:"#{k}=", v)
+    end
+  end
+
+  def tags=(tags)
+    if tags.to_s.empty?
+      @tags = []
+    else
+      @tags = tags.uniq
+    end
+  end
+
+  def tags
+    @tags || []
+  end
+
+  def type
+    self.class.name
+  end
+
+  def _id=(id)
+    self.id = id
+  end
+
+  def created_at
+    timecast(@created_at)
+  end
+
+  def updated_at
+    timecast(@updated_at)
+  end
+
+  def detached_at
+    timecast(@detached_at)
   end
 
   def delete
