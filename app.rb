@@ -58,6 +58,10 @@ Cuba.define do
     res.headers[header] = directives
   end
 
+  def escape_data_json(s)
+    s.to_s.gsub('/', '\/')
+  end
+
   on "api" do
     run Api
   end

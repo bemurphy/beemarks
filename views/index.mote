@@ -1,5 +1,5 @@
 <div id="links-wrapper"></div>
 
 <script type="application/json" id="links-data">
-  {{ serialized_links.to_json }}
+  {{ this.escape_data_json serialized_links.to_json }}
 </script>
