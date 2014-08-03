@@ -4,12 +4,6 @@ end
 Api.define do
   res.headers["Content-Type"] = "application/json; charset=utf-8"
 
-  on delete, "links/:id" do |id|
-    link = Link[id]
-    link.detach
-    res.write({status: 'ok'}.to_json)
-  end
-
   on get, "links/:id" do |id|
     link = Link[id]
     res.write(LinkSerializer.new(link).to_json)
@@ -79,4 +73,11 @@ Api.define do
       res.write({status: 'error'}.to_json)
     end
   end
+
+  on delete, "links/:id" do |id|
+    link = Link[id]
+    link.detach
+    res.write({status: 'ok'}.to_json)
+  end
+
 end
