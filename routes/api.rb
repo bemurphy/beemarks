@@ -79,5 +79,4 @@ Api.define do
     link.detach
     res.write({status: 'ok'}.to_json)
   end
-
 end
