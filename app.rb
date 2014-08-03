@@ -55,6 +55,6 @@ Cuba.define do
     links = Link.all_for_user(Link::DEFAULT_USER_ID)
     serialized_links = LinkCollectionSerializer.new(links)
 
-    render('index', links: links, serialized_links: serialized_links)
+    render('index', serialized_links: serialized_links)
   end
 end
