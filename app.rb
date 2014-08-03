@@ -44,6 +44,20 @@ Cuba.use Rack::Static,
 Cuba.define do
   persist_session!
 
+  %w(Content-Security-Policy X-Content-Security-Policy X-WebKit-CSP).each do |header|
+    directives = [
+      "default-src 'none';",
+      # TODO get the unsafe-eval out of here
+      "script-src 'self' ajax.googleapis.com getbootstrap.com bootswatch.com 'unsafe-eval';",
+      "connect-src 'self';",
+      "font-src 'self' themes.googleusercontent.com bootswatch.com;",
+      "img-src 'self' bootswatch.com;",
+      "style-src 'self' bootswatch.com fonts.googleapis.com;"
+    ].join(" ")
+
+    res.headers[header] = directives
+  end
+
   on "api" do
     run Api
   end
