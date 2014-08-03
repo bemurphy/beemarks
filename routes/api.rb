@@ -65,12 +65,18 @@ Api.define do
   on put, "links/:id" do |id|
     link = Link[id]
 
-    link.update({
+    filter = LinkUpdateFilter.new({
       title: req.params["title"],
       url: req.params["url"],
       tags: req.params["tags"].uniq
     })
 
-    res.write({status: 'ok'}.to_json)
+    if filter.valid?
+      link.update(filter.attributes)
+      res.write({status: 'ok'}.to_json)
+    else
+      res.status = 400
+      res.write({status: 'error'}.to_json)
+    end
   end
 end
