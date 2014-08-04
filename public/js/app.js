@@ -73,18 +73,6 @@
     tag: 'links',
 
     scope: {
-      // displayLinks: function() {
-      //   var tag = can.route.attr('tag');
-
-      //   if (tag) {
-      //     return this.links.filter(function(link) {
-      //       return link.attr('tags').indexOf(tag) !== -1;
-      //     });
-      //   } else {
-      //     return this.links;
-      //   }
-      // },
-
       searchInput: function(_, el, ev) {
         var enterCode = 13;
 
@@ -119,18 +107,6 @@
         ev.preventDefault();
         this.scope.addview.add();
       },
-
-      // '{links} add': function(x, y, newItems) {
-      //   if (!newItems[0]) return;
-
-      //   var selector = '#link-' + newItems[0].attr('id');
-
-      //   setTimeout(function(){
-      //     $('html,body').animate({
-      //       scrollTop: ($('#link-' + newItems[0].attr('id')).offset().top - 1)
-      //     }, 150);
-      //   }, 0);
-      // }
     }
   });
 
@@ -235,13 +211,4 @@
     addview: addLinkModal,
     editview: editLinkModal
   }));
-
-  // var Router = can.Control({
-  //   'tags/:tag route': function(data) {
-  //     // console.log('change', data);
-  //   }
-  // });
-
-  // new Router(window);
-  // can.route.ready();
 })();
