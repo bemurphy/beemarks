@@ -19,12 +19,28 @@
     replaceWith: function(newLinks) {
       this.replace([]);
       this.replace(newLinks);
+      // if (newLinks.next_startkey) {
+      //   newLinks.attr('startkey', newLinks.next_startkey && newLinks.next_startkey[1]);
+      //   newLinks.attr('startdocid', newLinks.next_startkey_docid);
+      // }
     },
 
     search: function(query, cb) {
       var self = this;
       Link.findAll({q: query}, function(newLinks){
         self.replaceWith(newLinks);
+      });
+    },
+
+    taggedWith: function(tags, cb) {
+      var self = this;
+      var url = '/api/tags/' + tags;
+
+      $.get(url).done(function(links){
+        self.replaceWith(links.data);
+        if (typeof cb === 'function') cb();
+      }).fail(function(){
+        console.log('an error occurred', arguments);
       });
     },
 
@@ -65,6 +81,10 @@
       '.btn click' : function(el, ev) {
         ev.preventDefault();
         this.scope.next();
+      },
+
+      '{list} change': function(el, ev) {
+        this.scope.attr('isVisible', can.route.attr('route') === '');
       }
     }
   });
@@ -85,14 +105,6 @@
     },
 
     events: {
-      'a[data-my-links] click': function(el, ev) {
-        ev.preventDefault();
-        var self = this;
-        Link.findAll({}, function(newLinks){
-          self.scope.links.replaceWith(newLinks);
-        });
-      },
-
       'a[data-edit] click': function(el, ev) {
         ev.preventDefault();
         this.scope.editview.edit(el.data('link'));
@@ -107,6 +119,18 @@
         ev.preventDefault();
         this.scope.addview.add();
       },
+
+      '#search-input blur': function(el, ev) {
+        this.scope.attr('searching', false);
+      },
+
+      '{scope} searching': function() {
+        if (this.scope.attr('searching')){
+          setTimeout(function(){
+            $('#search-input').focus();
+          }, 0);
+        }
+      }
     }
   });
 
@@ -211,4 +235,29 @@
     addview: addLinkModal,
     editview: editLinkModal
   }));
+
+  var Router = can.Control({
+    'tags route': function(data) {
+      $.get('/api/tags').done(function(data){
+        console.log(data);
+      }).fail(function(){
+        console.log(arguments);
+      });
+    },
+
+    'tags/:tags route': function(data) {
+      links.taggedWith(data.tags);
+    },
+
+    'route': function() {
+      can.route('', { 'showPager': true });
+
+      Link.findAll({}, function(newLinks){
+        links.replaceWith(newLinks);
+      });
+    }
+  });
+
+  new Router(window);
+  can.route.ready();
 })();

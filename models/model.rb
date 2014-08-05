@@ -18,6 +18,13 @@ class Model
     new(doc)
   end
 
+  def self.multi_get(ids)
+    # yes, multi get is really a POST
+    url  = File.join(database, "_all_docs?include_docs=true")
+    data = JSON[RestClient.post url, {keys: ids}.to_json, content_type: :json]
+    data["rows"].map {|r| r["doc"]}.map {|d| new d}
+  end
+
   def self.create(atts = {})
     new(atts).save
   end
@@ -80,6 +87,7 @@ class Model
       atts["type"] = type
       instance_variables.each do |ivar|
         att = ivar[1..-1].to_sym
+        next if skip_attribute?(att)
         atts[att] = send(att)
       end
     end
@@ -103,6 +111,10 @@ class Model
 
   def timecast(t)
     t && UnixTime.at(t.to_i)
+  end
+
+  def skip_attribute?(att)
+    false
   end
 
   def save_as_new

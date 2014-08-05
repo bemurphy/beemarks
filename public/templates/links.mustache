@@ -12,11 +12,12 @@
         {{/searching}}
         {{#searching}}
         <a href="#" class="searching"><span class="glyphicon glyphicon-search"></span>
-          <input type="text" class="form-control input-sm" can-keyup="searchInput" />
+          <input id="search-input" type="text" class="form-control input-sm" can-keyup="searchInput" />
         </a>
         {{/searching}}
       </li>
-      <li><a href="/" data-my-links><span class="glyphicon glyphicon-bookmark"></span> My Links</a></li>
+      <li><a href="#!"><span class="glyphicon glyphicon-bookmark"></span> My Links</a></li>
+      <li><a href="#!tags"><span class="glyphicon glyphicon-tag"></span> My Tags</a></li>
       <li><a id="add-link" data-add href="#"><span class="glyphicon glyphicon-plus"></span> Add Link</a></li>
       <li><a href="#"><span class="glyphicon glyphicon-cog"></span> Settings</a></li>
     </ul>

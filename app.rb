@@ -55,7 +55,9 @@ Cuba.define do
       "style-src 'self' fonts.googleapis.com;"
     ].join(" ")
 
-    res.headers[header] = directives
+    unless ENV['SKIP_CSP'] == 'true'
+      res.headers[header] = directives
+    end
   end
 
   def escape_data_json(s)

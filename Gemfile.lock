@@ -8,11 +8,15 @@ GEM
       cuba (~> 3.1)
     daemons (1.1.9)
     eventmachine (1.0.3)
+    hiredis (0.5.2)
     mote (1.1.2)
     netrc (0.7.7)
+    nido (0.0.1)
     rack (1.5.2)
     rack-protection (1.5.3)
       rack
+    redic (1.1.1)
+      hiredis
     rest_client (1.7.3)
       netrc (~> 0.7.7)
     scrivener (0.2.0)
@@ -33,7 +37,9 @@ DEPENDENCIES
   cuba
   cuba-contrib
   mote
+  nido
   rack-protection
+  redic
   rest_client
   scrivener
   scrivener_errors

@@ -49,6 +49,7 @@ Api.define do
 
     if filter.valid?
       link = Link.create(filter.attributes)
+      Tagging.update(link)
       res.write(LinkSerializer.new(link).to_json)
     else
       res.status = 400
@@ -67,6 +68,7 @@ Api.define do
 
     if filter.valid?
       link.update(filter.attributes)
+      Tagging.update(link)
       res.write({status: 'ok'}.to_json)
     else
       res.status = 400
@@ -77,6 +79,18 @@ Api.define do
   on delete, "links/:id" do |id|
     link = Link[id]
     link.detach
+    Tagging.delete(link)
     res.write({status: 'ok'}.to_json)
+  end
+
+  on get, "tags/:tags" do |tags|
+    tags  = tags.split(',')
+    links = Tagging.links_for(Link::DEFAULT_USER_ID, tags)
+
+    res.write({data: links.map { |l| LinkSerializer.new(l).to_hash }}.to_json)
+  end
+
+  on get, "tags" do
+    res.write({data: %w[foo bar buzz]}.to_json)
   end
 end

@@ -43,16 +43,22 @@ class Link < Model
     collection
   end
 
-  def tags=(tags)
-    if tags.to_s.empty?
+  def tags=(new_tags)
+    @tags_was = tags.dup
+
+    if new_tags.to_s.empty?
       @tags = []
     else
-      @tags = tags.uniq
+      @tags = new_tags.uniq
     end
   end
 
   def tags
     @tags || []
+  end
+
+  def tags_was
+    @tags_was || []
   end
 
   def detached_at
@@ -64,5 +70,11 @@ class Link < Model
 
     self.detached_at = Time.now
     save
+  end
+
+  private
+
+  def skip_attribute?(att)
+    att == :tags_was
   end
 end
