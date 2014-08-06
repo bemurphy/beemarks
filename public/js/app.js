@@ -253,6 +253,10 @@
       links.search(data.query, $.noop);
     },
 
+    'settings route': function(data) {
+      console.log('TODO settings');
+    },
+
     'route': function() {
       Link.findAll({}, function(newLinks){
         links.replaceWith(newLinks);
