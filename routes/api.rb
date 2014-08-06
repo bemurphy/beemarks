@@ -91,6 +91,6 @@ Api.define do
   end
 
   on get, "tags" do
-    res.write({data: %w[foo bar buzz]}.to_json)
+    res.write(Tagging.tags_for(Link::DEFAULT_USER_ID).map(&:to_hash).to_json)
   end
 end

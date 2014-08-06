@@ -38,4 +38,10 @@ class Tagging
 
     Link.multi_get ids
   end
+
+  def self.tags_for(user_id)
+    url = File.join(Model.database, "_design/links", "_view/byTag", "?group=true")
+    data = JSON[RestClient.get(url, content_type: :json)]
+    data["rows"].map {|r| { count: r['key'][0], name: r['key'][1] } }
+  end
 end
