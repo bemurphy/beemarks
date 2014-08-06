@@ -98,8 +98,8 @@
 
         if (ev.keyCode === enterCode) {
           ev.preventDefault();
-          this.links.search($(el).val(), $.noop);
           this.attr('searching', false);
+          window.location.hash = '#!search/' + $(el).val();
         }
       }
     },
@@ -249,9 +249,11 @@
       links.taggedWith(data.tags);
     },
 
-    'route': function() {
-      can.route('', { 'showPager': true });
+    'search/:query route': function(data) {
+      links.search(data.query, $.noop);
+    },
 
+    'route': function() {
       Link.findAll({}, function(newLinks){
         links.replaceWith(newLinks);
       });
